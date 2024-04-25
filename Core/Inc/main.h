@@ -49,8 +49,6 @@ extern "C" {
 
 /* USER CODE END EM */
 
-void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
-
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 
@@ -63,14 +61,10 @@ void Error_Handler(void);
 #define HEAT_IMU_GPIO_Port GPIOB
 #define GND_OF_5VO_Pin GPIO_PIN_13
 #define GND_OF_5VO_GPIO_Port GPIOG
-#define OLED_SCK_Pin GPIO_PIN_3
-#define OLED_SCK_GPIO_Port GPIOB
 #define OLED_B9__Pin GPIO_PIN_9
 #define OLED_B9__GPIO_Port GPIOB
 #define DBUS_RX_Pin GPIO_PIN_7
 #define DBUS_RX_GPIO_Port GPIOB
-#define DBUS_TX_NC_Pin GPIO_PIN_6
-#define DBUS_TX_NC_GPIO_Port GPIOB
 #define SERVO_PWM_Y_Pin GPIO_PIN_7
 #define SERVO_PWM_Y_GPIO_Port GPIOI
 #define SERVO_PWM_X_Pin GPIO_PIN_6
@@ -85,8 +79,6 @@ void Error_Handler(void);
 #define SERVO_PWM_A9_GPIO_Port GPIOA
 #define POWER1_CTRL_Pin GPIO_PIN_2
 #define POWER1_CTRL_GPIO_Port GPIOH
-#define SERVO_PWM_A8_Pin GPIO_PIN_8
-#define SERVO_PWM_A8_GPIO_Port GPIOA
 #define POWER2_CTRL_Pin GPIO_PIN_3
 #define POWER2_CTRL_GPIO_Port GPIOH
 #define POWER3_CTRL_Pin GPIO_PIN_4
@@ -99,10 +91,6 @@ void Error_Handler(void);
 #define LED_B_GPIO_Port GPIOG
 #define LED_C_Pin GPIO_PIN_6
 #define LED_C_GPIO_Port GPIOG
-#define IMUI_SCK_Pin GPIO_PIN_7
-#define IMUI_SCK_GPIO_Port GPIOF
-#define IMU_NSS_Pin GPIO_PIN_6
-#define IMU_NSS_GPIO_Port GPIOF
 #define SERVO_PWM_B_Pin GPIO_PIN_12
 #define SERVO_PWM_B_GPIO_Port GPIOH
 #define LED_D_Pin GPIO_PIN_5
@@ -111,10 +99,6 @@ void Error_Handler(void);
 #define LED_E_GPIO_Port GPIOG
 #define LED_F_Pin GPIO_PIN_3
 #define LED_F_GPIO_Port GPIOG
-#define IMU_MO_Pin GPIO_PIN_9
-#define IMU_MO_GPIO_Port GPIOF
-#define IMU_MI_Pin GPIO_PIN_8
-#define IMU_MI_GPIO_Port GPIOF
 #define SERVO_PWM_C_Pin GPIO_PIN_11
 #define SERVO_PWM_C_GPIO_Port GPIOH
 #define SERVO_PWM_D_Pin GPIO_PIN_10
@@ -143,24 +127,18 @@ void Error_Handler(void);
 #define SERVO_PWM_U_GPIO_Port GPIOA
 #define OLED_MI_Pin GPIO_PIN_6
 #define OLED_MI_GPIO_Port GPIOA
-#define LED_E11_Pin GPIO_PIN_11
-#define LED_E11_GPIO_Port GPIOE
-#define SERVO_PWM_E14_Pin GPIO_PIN_14
-#define SERVO_PWM_E14_GPIO_Port GPIOE
+#define LED_RED_Pin GPIO_PIN_11
+#define LED_RED_GPIO_Port GPIOE
 #define SERVO_PWM_V_Pin GPIO_PIN_3
 #define SERVO_PWM_V_GPIO_Port GPIOA
-#define OLED_MO_Pin GPIO_PIN_7
-#define OLED_MO_GPIO_Port GPIOA
 #define OLED_B0__Pin GPIO_PIN_0
 #define OLED_B0__GPIO_Port GPIOB
-#define LED_F14_Pin GPIO_PIN_14
-#define LED_F14_GPIO_Port GPIOF
+#define LED_GREEN_Pin GPIO_PIN_14
+#define LED_GREEN_GPIO_Port GPIOF
 #define SD_EXTI__Pin GPIO_PIN_15
 #define SD_EXTI__GPIO_Port GPIOE
-#define SD_EXTI__EXTI_IRQn EXTI15_10_IRQn
 #define SYNC_OUT_Pin GPIO_PIN_14
 #define SYNC_OUT_GPIO_Port GPIOB
-#define SYNC_OUT_EXTI_IRQn EXTI15_10_IRQn
 #define SYNC_IN_Pin GPIO_PIN_15
 #define SYNC_IN_GPIO_Port GPIOB
 

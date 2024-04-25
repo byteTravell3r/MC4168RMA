@@ -1,0 +1,5 @@
+../Core/Src/USR_CAN.c:14:6:CAN1_START_IRQ	8	static
+../Core/Src/USR_CAN.c:28:6:HAL_CAN_RxFifo0FullCallback	32	static
+../Core/Src/USR_CAN.c:45:6:Motor_ResolveFeedbackData	16	static
+../Core/Src/USR_CAN.c:61:6:Motor_GetInitPosition	16	static
+../Core/Src/USR_CAN.c:66:6:Motor_SendCmd	16	static

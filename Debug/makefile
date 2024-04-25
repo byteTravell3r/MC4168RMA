@@ -34,34 +34,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := RM-A-DEVBOARD
+BUILD_ARTIFACT_NAME := MC4128RMA_Controller
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-RM-A-DEVBOARD.elf \
+MC4128RMA_Controller.elf \
 
 MAP_FILES += \
-RM-A-DEVBOARD.map \
+MC4128RMA_Controller.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-RM-A-DEVBOARD.list \
+MC4128RMA_Controller.list \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: RM-A-DEVBOARD.elf secondary-outputs
+main-build: MC4128RMA_Controller.elf secondary-outputs
 
 # Tool invocations
-RM-A-DEVBOARD.elf RM-A-DEVBOARD.map: $(OBJS) $(USER_OBJS) C:\Users\byte\Documents\RM-A-DEVBOARD\STM32F427IIHX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "RM-A-DEVBOARD.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\byte\Documents\RM-A-DEVBOARD\STM32F427IIHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="RM-A-DEVBOARD.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+MC4128RMA_Controller.elf MC4128RMA_Controller.map: $(OBJS) $(USER_OBJS) C:\Users\byte\Documents\MC4168RMA\STM32F427IIHX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "MC4128RMA_Controller.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\byte\Documents\MC4168RMA\STM32F427IIHX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MC4128RMA_Controller.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -70,14 +70,14 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-RM-A-DEVBOARD.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "RM-A-DEVBOARD.list"
+MC4128RMA_Controller.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "MC4128RMA_Controller.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) RM-A-DEVBOARD.elf RM-A-DEVBOARD.list RM-A-DEVBOARD.map default.size.stdout
+	-$(RM) MC4128RMA_Controller.elf MC4128RMA_Controller.list MC4128RMA_Controller.map default.size.stdout
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
