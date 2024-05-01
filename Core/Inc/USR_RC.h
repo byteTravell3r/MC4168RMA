@@ -9,10 +9,10 @@
 #define INC_USR_RC_H_
 
 #include "main.h"
-extern UART_HandleTypeDef huart1;
+extern UART_HandleTypeDef huart7;
 
-#define iBUS_UART				(&huart1)
-#define IBUS_UART_INSTANCE		(USART1)
+#define iBUS_UART				(&huart7)
+#define IBUS_UART_INSTANCE		(UART7)
 #define iBUS_CHANNEL_COUNT		10		// Use 6 channels
 
 void iBUS_Start_RxIT();

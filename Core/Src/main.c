@@ -112,9 +112,8 @@ int main(void)
 	PID_StructInit(&PID_MotorSpeed[0], 20000, 20000, 1.5f, 0.1f, 0.0f);
 	PID_StructInit(&PID_MotorSpeed[1], 20000, 20000, 1.5f, 0.1f, 0.0f);
 	CAN1_START_IRQ();
-	IBUS_INIT();
+	iBUS_Start_RxIT();
 	static int TARGET_SPD[2];
-	static char report[32];
 	HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, GPIO_PIN_SET);
 	HAL_GPIO_WritePin(GND_OF_5VO_GPIO_Port, GND_OF_5VO_Pin, GPIO_PIN_SET);
 
@@ -134,16 +133,9 @@ int main(void)
 
 		Motor_SendCmd(PID_MotorSpeed[MotorX].Output,
 				PID_MotorSpeed[MotorY].Output);
-		extern uint16_t channel[];
-		if (channel[1] == 0) {
-			TARGET_SPD[MotorX] = 0;
-		} else {
-			TARGET_SPD[MotorX] = (channel[1] - 1500) * 5;
-		}
-//		TARGET_SPD[MotorY] = (channel[2] - 1500) * 3;
-//		TARGET_SPD[MotorX] = 10;
-		sprintf(report, "TAR_SPD=%d, RPM=%d\n", TARGET_SPD[MotorX], Motor[MotorX].RPM);
-		HAL_UART_Transmit(&huart7, report, sizeof(report), 100);
+		TARGET_SPD[MotorX] = (iBUS_Channel[1] - 1500) * 3;
+		TARGET_SPD[MotorY] = (iBUS_Channel[2] - 1500) * 3;
+
 		HAL_Delay(1);
 	}
   /* USER CODE END 3 */
@@ -194,7 +186,7 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
   {
