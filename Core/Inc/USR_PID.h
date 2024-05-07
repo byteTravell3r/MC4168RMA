@@ -10,7 +10,7 @@ enum {
 typedef struct pid_t {
 	float p, i, d, pout, iout, dout;
 	float set[3], get[3], err[3];		//目标值 测量值 误差
-	float Output, last_pos_out;
+	float Output, Output_Prev;
 	float MaxErr, DeadBand;			//err < deadband return
 	uint32_t MaxOutput, IntegralLimit;	//输出限幅 积分限幅
 
@@ -23,11 +23,11 @@ typedef struct pid_t {
 } PID_TypeDef;
 
 void PID_StructInit(PID_TypeDef *pid, uint32_t maxout, uint32_t I_Limit,
-		float kp, float ki, float kd);
+		float kp, float ki, float kd, float deadband);
 
-uint8_t PID_Calculate(PID_TypeDef *pid, float fdb, float ref);
+float PID_Calculate(PID_TypeDef *pid, float get, float set);
 
-extern PID_TypeDef PID_MotorSpeed[2];
+extern PID_TypeDef PID_MotorSpeed[2], PID_MotorPosition[2];
 
 #endif
 

@@ -28,7 +28,7 @@ static void pid_reset(PID_TypeDef *pid, float kp, float ki, float kd) {
 	pid->d = kd;
 }
 
-uint8_t PID_Calculate(PID_TypeDef *pid, float get, float set) {
+float PID_Calculate(PID_TypeDef *pid, float get, float set) {
 	pid->get[CURR] = get;
 	pid->set[CURR] = set;
 	pid->err[CURR] = set - get;	//set - measure
@@ -43,7 +43,7 @@ uint8_t PID_Calculate(PID_TypeDef *pid, float get, float set) {
 	abs_limit(&(pid->iout), pid->IntegralLimit);
 	pid->Output = pid->pout + pid->iout + pid->dout;
 	abs_limit(&(pid->Output), pid->MaxOutput);
-	pid->last_pos_out = pid->Output;	//update last time
+	pid->Output_Prev = pid->Output;	//update last time
 
 	pid->err[PREV2] = pid->err[PREV1];
 	pid->err[PREV1] = pid->err[CURR];
@@ -51,15 +51,16 @@ uint8_t PID_Calculate(PID_TypeDef *pid, float get, float set) {
 	pid->get[PREV1] = pid->get[CURR];
 	pid->set[PREV2] = pid->set[PREV1];
 	pid->set[PREV1] = pid->set[CURR];
-	return 0;
+	return pid->Output;
 }
 
 void PID_StructInit(PID_TypeDef *pid, uint32_t maxout,
-		uint32_t I_Limit, float kp, float ki, float kd) {
+		uint32_t I_Limit, float kp, float ki, float kd, float deadband) {
 
 	pid->f_param_init = pid_param_init;
 	pid->f_pid_reset = pid_reset;
 	pid->f_param_init(pid, maxout, I_Limit, kp, ki, kd);
+	pid->DeadBand = deadband;
 }
 
-PID_TypeDef PID_MotorSpeed[2];
+PID_TypeDef PID_MotorSpeed[2], PID_MotorPosition[2];
