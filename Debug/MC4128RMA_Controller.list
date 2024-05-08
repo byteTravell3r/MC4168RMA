@@ -39,15 +39,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  17 .debug_macro  00023755  00000000  00000000  00015ad5  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   0000d007  00000000  00000000  0003922a  2**0
+ 18 .debug_line   0000d008  00000000  00000000  0003922a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    000d3238  00000000  00000000  00046231  2**0
+ 19 .debug_str    000d3238  00000000  00000000  00046232  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000043  00000000  00000000  00119469  2**0
+ 20 .comment      00000043  00000000  00000000  0011946a  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  00002608  00000000  00000000  001194ac  2**2
+ 21 .debug_frame  00002608  00000000  00000000  001194b0  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 00000050  00000000  00000000  0011bab4  2**0
+ 22 .debug_line_str 00000050  00000000  00000000  0011bab8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -1289,44 +1289,44 @@ int main(void) {
 	HAL_GPIO_WritePin(POWER1_CTRL_GPIO_Port, POWER1_CTRL_Pin, GPIO_PIN_SET);
  8000bb0:	2201      	movs	r2, #1
  8000bb2:	2104      	movs	r1, #4
- 8000bb4:	486e      	ldr	r0, [pc, #440]	@ (8000d70 <main+0x1e0>)
+ 8000bb4:	486f      	ldr	r0, [pc, #444]	@ (8000d74 <main+0x1e4>)
  8000bb6:	f002 f80b 	bl	8002bd0 <HAL_GPIO_WritePin>
 	HAL_GPIO_WritePin(POWER3_CTRL_GPIO_Port, POWER3_CTRL_Pin, GPIO_PIN_SET);
  8000bba:	2201      	movs	r2, #1
  8000bbc:	2110      	movs	r1, #16
- 8000bbe:	486c      	ldr	r0, [pc, #432]	@ (8000d70 <main+0x1e0>)
+ 8000bbe:	486d      	ldr	r0, [pc, #436]	@ (8000d74 <main+0x1e4>)
  8000bc0:	f002 f806 	bl	8002bd0 <HAL_GPIO_WritePin>
 	HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, GPIO_PIN_SET);
  8000bc4:	2201      	movs	r2, #1
  8000bc6:	f44f 6100 	mov.w	r1, #2048	@ 0x800
- 8000bca:	486a      	ldr	r0, [pc, #424]	@ (8000d74 <main+0x1e4>)
+ 8000bca:	486b      	ldr	r0, [pc, #428]	@ (8000d78 <main+0x1e8>)
  8000bcc:	f002 f800 	bl	8002bd0 <HAL_GPIO_WritePin>
 	HAL_GPIO_WritePin(GND_OF_5VO_GPIO_Port, GND_OF_5VO_Pin, GPIO_PIN_SET);
  8000bd0:	2201      	movs	r2, #1
  8000bd2:	f44f 5100 	mov.w	r1, #8192	@ 0x2000
- 8000bd6:	4868      	ldr	r0, [pc, #416]	@ (8000d78 <main+0x1e8>)
+ 8000bd6:	4869      	ldr	r0, [pc, #420]	@ (8000d7c <main+0x1ec>)
  8000bd8:	f001 fffa 	bl	8002bd0 <HAL_GPIO_WritePin>
 
-	PID_StructInit(&PID_MotorSpeed[MotorX], 3000.f, 10000.f, 0.6f, 0.000f, 3.6f, 1.0f);
- 8000bdc:	eef7 1a00 	vmov.f32	s3, #112	@ 0x3f800000  1.0
- 8000be0:	ed9f 1a66 	vldr	s2, [pc, #408]	@ 8000d7c <main+0x1ec>
+	PID_StructInit(&PID_MotorSpeed[MotorX], 2000.f, 10000.f, 5.0f, 0, 5.1f, 0);
+ 8000bdc:	eddf 1a68 	vldr	s3, [pc, #416]	@ 8000d80 <main+0x1f0>
+ 8000be0:	ed9f 1a68 	vldr	s2, [pc, #416]	@ 8000d84 <main+0x1f4>
  8000be4:	eddf 0a66 	vldr	s1, [pc, #408]	@ 8000d80 <main+0x1f0>
- 8000be8:	ed9f 0a66 	vldr	s0, [pc, #408]	@ 8000d84 <main+0x1f4>
+ 8000be8:	eeb1 0a04 	vmov.f32	s0, #20	@ 0x40a00000  5.0
  8000bec:	f242 7210 	movw	r2, #10000	@ 0x2710
- 8000bf0:	f640 31b8 	movw	r1, #3000	@ 0xbb8
+ 8000bf0:	f44f 61fa 	mov.w	r1, #2000	@ 0x7d0
  8000bf4:	4864      	ldr	r0, [pc, #400]	@ (8000d88 <main+0x1f8>)
  8000bf6:	f7ff fef1 	bl	80009dc <PID_StructInit>
-	PID_StructInit(&PID_MotorSpeed[MotorY], 3000.f, 10000.f, 0.6f, 0.000f, 3.6f, 1.0f);
- 8000bfa:	eef7 1a00 	vmov.f32	s3, #112	@ 0x3f800000  1.0
- 8000bfe:	ed9f 1a5f 	vldr	s2, [pc, #380]	@ 8000d7c <main+0x1ec>
+	PID_StructInit(&PID_MotorSpeed[MotorY], 3000.f, 10000.f, 5.0f, 0, 5.0f, 0);
+ 8000bfa:	eddf 1a61 	vldr	s3, [pc, #388]	@ 8000d80 <main+0x1f0>
+ 8000bfe:	eeb1 1a04 	vmov.f32	s2, #20	@ 0x40a00000  5.0
  8000c02:	eddf 0a5f 	vldr	s1, [pc, #380]	@ 8000d80 <main+0x1f0>
- 8000c06:	ed9f 0a5f 	vldr	s0, [pc, #380]	@ 8000d84 <main+0x1f4>
+ 8000c06:	eeb1 0a04 	vmov.f32	s0, #20	@ 0x40a00000  5.0
  8000c0a:	f242 7210 	movw	r2, #10000	@ 0x2710
  8000c0e:	f640 31b8 	movw	r1, #3000	@ 0xbb8
  8000c12:	485e      	ldr	r0, [pc, #376]	@ (8000d8c <main+0x1fc>)
  8000c14:	f7ff fee2 	bl	80009dc <PID_StructInit>
-	PID_StructInit(&PID_MotorPosition[MotorX], 100000.f, 10000.f, 0.08f, 0.000f, 0.84f, 1.0f);
- 8000c18:	eef7 1a00 	vmov.f32	s3, #112	@ 0x3f800000  1.0
+	PID_StructInit(&PID_MotorPosition[MotorX], 100000.f, 10000.f, 0.08f, 0, 0.84f, 0);
+ 8000c18:	eddf 1a59 	vldr	s3, [pc, #356]	@ 8000d80 <main+0x1f0>
  8000c1c:	ed9f 1a5c 	vldr	s2, [pc, #368]	@ 8000d90 <main+0x200>
  8000c20:	eddf 0a57 	vldr	s1, [pc, #348]	@ 8000d80 <main+0x1f0>
  8000c24:	ed9f 0a5b 	vldr	s0, [pc, #364]	@ 8000d94 <main+0x204>
@@ -1334,8 +1334,8 @@ int main(void) {
  8000c2c:	495a      	ldr	r1, [pc, #360]	@ (8000d98 <main+0x208>)
  8000c2e:	485b      	ldr	r0, [pc, #364]	@ (8000d9c <main+0x20c>)
  8000c30:	f7ff fed4 	bl	80009dc <PID_StructInit>
-	PID_StructInit(&PID_MotorPosition[MotorY], 100000.f, 10000.f, 0.08f, 0.000f, 0.84f, 1.0f);
- 8000c34:	eef7 1a00 	vmov.f32	s3, #112	@ 0x3f800000  1.0
+	PID_StructInit(&PID_MotorPosition[MotorY], 100000.f, 10000.f, 0.08f, 0, 0.84f, 0);
+ 8000c34:	eddf 1a52 	vldr	s3, [pc, #328]	@ 8000d80 <main+0x1f0>
  8000c38:	ed9f 1a55 	vldr	s2, [pc, #340]	@ 8000d90 <main+0x200>
  8000c3c:	eddf 0a50 	vldr	s1, [pc, #320]	@ 8000d80 <main+0x1f0>
  8000c40:	ed9f 0a54 	vldr	s0, [pc, #336]	@ 8000d94 <main+0x204>
@@ -1362,109 +1362,113 @@ int main(void) {
 	HAL_Delay(100);
  8000c64:	2064      	movs	r0, #100	@ 0x64
  8000c66:	f000 fdbb 	bl	80017e0 <HAL_Delay>
+	/* USER CODE END 2 */
+	iBUS_Channel[0] = 1500;
+ 8000c6a:	4b50      	ldr	r3, [pc, #320]	@ (8000dac <main+0x21c>)
+ 8000c6c:	f240 52dc 	movw	r2, #1500	@ 0x5dc
+ 8000c70:	801a      	strh	r2, [r3, #0]
 	/* USER CODE BEGIN WHILE */
 	while (1) {
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
-		targetPosition[MotorX] = (iBUS_Channel[1] - 1500) * 300;
- 8000c6a:	4b50      	ldr	r3, [pc, #320]	@ (8000dac <main+0x21c>)
- 8000c6c:	885b      	ldrh	r3, [r3, #2]
- 8000c6e:	f2a3 53dc 	subw	r3, r3, #1500	@ 0x5dc
- 8000c72:	f44f 7296 	mov.w	r2, #300	@ 0x12c
- 8000c76:	fb02 f303 	mul.w	r3, r2, r3
- 8000c7a:	ee07 3a90 	vmov	s15, r3
- 8000c7e:	eef8 7ae7 	vcvt.f32.s32	s15, s15
- 8000c82:	4b4b      	ldr	r3, [pc, #300]	@ (8000db0 <main+0x220>)
- 8000c84:	edc3 7a00 	vstr	s15, [r3]
+		targetPosition[MotorX] = (iBUS_Channel[0] - 1500) * 100;
+ 8000c72:	4b4e      	ldr	r3, [pc, #312]	@ (8000dac <main+0x21c>)
+ 8000c74:	881b      	ldrh	r3, [r3, #0]
+ 8000c76:	f2a3 53dc 	subw	r3, r3, #1500	@ 0x5dc
+ 8000c7a:	2264      	movs	r2, #100	@ 0x64
+ 8000c7c:	fb02 f303 	mul.w	r3, r2, r3
+ 8000c80:	ee07 3a90 	vmov	s15, r3
+ 8000c84:	eef8 7ae7 	vcvt.f32.s32	s15, s15
+ 8000c88:	4b49      	ldr	r3, [pc, #292]	@ (8000db0 <main+0x220>)
+ 8000c8a:	edc3 7a00 	vstr	s15, [r3]
 		targetSpeed[MotorX] = PID_Calculate(&PID_MotorPosition[MotorX], Motor[MotorX].TOTAL_ANGLE, targetPosition[MotorX]);
- 8000c88:	4b4a      	ldr	r3, [pc, #296]	@ (8000db4 <main+0x224>)
- 8000c8a:	695b      	ldr	r3, [r3, #20]
- 8000c8c:	ee07 3a90 	vmov	s15, r3
- 8000c90:	eef8 7ae7 	vcvt.f32.s32	s15, s15
- 8000c94:	4b46      	ldr	r3, [pc, #280]	@ (8000db0 <main+0x220>)
- 8000c96:	ed93 7a00 	vldr	s14, [r3]
- 8000c9a:	eef0 0a47 	vmov.f32	s1, s14
- 8000c9e:	eeb0 0a67 	vmov.f32	s0, s15
- 8000ca2:	483e      	ldr	r0, [pc, #248]	@ (8000d9c <main+0x20c>)
- 8000ca4:	f7ff fdbf 	bl	8000826 <PID_Calculate>
- 8000ca8:	eef0 7a40 	vmov.f32	s15, s0
- 8000cac:	4b3d      	ldr	r3, [pc, #244]	@ (8000da4 <main+0x214>)
- 8000cae:	edc3 7a00 	vstr	s15, [r3]
+ 8000c8e:	4b49      	ldr	r3, [pc, #292]	@ (8000db4 <main+0x224>)
+ 8000c90:	695b      	ldr	r3, [r3, #20]
+ 8000c92:	ee07 3a90 	vmov	s15, r3
+ 8000c96:	eef8 7ae7 	vcvt.f32.s32	s15, s15
+ 8000c9a:	4b45      	ldr	r3, [pc, #276]	@ (8000db0 <main+0x220>)
+ 8000c9c:	ed93 7a00 	vldr	s14, [r3]
+ 8000ca0:	eef0 0a47 	vmov.f32	s1, s14
+ 8000ca4:	eeb0 0a67 	vmov.f32	s0, s15
+ 8000ca8:	483c      	ldr	r0, [pc, #240]	@ (8000d9c <main+0x20c>)
+ 8000caa:	f7ff fdbc 	bl	8000826 <PID_Calculate>
+ 8000cae:	eef0 7a40 	vmov.f32	s15, s0
+ 8000cb2:	4b3c      	ldr	r3, [pc, #240]	@ (8000da4 <main+0x214>)
+ 8000cb4:	edc3 7a00 	vstr	s15, [r3]
 		PID_Calculate(&PID_MotorSpeed[MotorX], Motor[MotorX].RPM, targetSpeed[MotorX]);
- 8000cb2:	4b40      	ldr	r3, [pc, #256]	@ (8000db4 <main+0x224>)
- 8000cb4:	f9b3 3000 	ldrsh.w	r3, [r3]
- 8000cb8:	ee07 3a90 	vmov	s15, r3
- 8000cbc:	eef8 7ae7 	vcvt.f32.s32	s15, s15
- 8000cc0:	4b38      	ldr	r3, [pc, #224]	@ (8000da4 <main+0x214>)
- 8000cc2:	ed93 7a00 	vldr	s14, [r3]
- 8000cc6:	eef0 0a47 	vmov.f32	s1, s14
- 8000cca:	eeb0 0a67 	vmov.f32	s0, s15
- 8000cce:	482e      	ldr	r0, [pc, #184]	@ (8000d88 <main+0x1f8>)
- 8000cd0:	f7ff fda9 	bl	8000826 <PID_Calculate>
+ 8000cb8:	4b3e      	ldr	r3, [pc, #248]	@ (8000db4 <main+0x224>)
+ 8000cba:	f9b3 3000 	ldrsh.w	r3, [r3]
+ 8000cbe:	ee07 3a90 	vmov	s15, r3
+ 8000cc2:	eef8 7ae7 	vcvt.f32.s32	s15, s15
+ 8000cc6:	4b37      	ldr	r3, [pc, #220]	@ (8000da4 <main+0x214>)
+ 8000cc8:	ed93 7a00 	vldr	s14, [r3]
+ 8000ccc:	eef0 0a47 	vmov.f32	s1, s14
+ 8000cd0:	eeb0 0a67 	vmov.f32	s0, s15
+ 8000cd4:	482c      	ldr	r0, [pc, #176]	@ (8000d88 <main+0x1f8>)
+ 8000cd6:	f7ff fda6 	bl	8000826 <PID_Calculate>
 
-		targetPosition[MotorY] = (iBUS_Channel[2] - 1500) * 300;
- 8000cd4:	4b35      	ldr	r3, [pc, #212]	@ (8000dac <main+0x21c>)
- 8000cd6:	889b      	ldrh	r3, [r3, #4]
- 8000cd8:	f2a3 53dc 	subw	r3, r3, #1500	@ 0x5dc
- 8000cdc:	f44f 7296 	mov.w	r2, #300	@ 0x12c
- 8000ce0:	fb02 f303 	mul.w	r3, r2, r3
- 8000ce4:	ee07 3a90 	vmov	s15, r3
- 8000ce8:	eef8 7ae7 	vcvt.f32.s32	s15, s15
- 8000cec:	4b30      	ldr	r3, [pc, #192]	@ (8000db0 <main+0x220>)
- 8000cee:	edc3 7a01 	vstr	s15, [r3, #4]
+		targetPosition[MotorY] = (iBUS_Channel[3] - 1500) * 100;
+ 8000cda:	4b34      	ldr	r3, [pc, #208]	@ (8000dac <main+0x21c>)
+ 8000cdc:	88db      	ldrh	r3, [r3, #6]
+ 8000cde:	f2a3 53dc 	subw	r3, r3, #1500	@ 0x5dc
+ 8000ce2:	2264      	movs	r2, #100	@ 0x64
+ 8000ce4:	fb02 f303 	mul.w	r3, r2, r3
+ 8000ce8:	ee07 3a90 	vmov	s15, r3
+ 8000cec:	eef8 7ae7 	vcvt.f32.s32	s15, s15
+ 8000cf0:	4b2f      	ldr	r3, [pc, #188]	@ (8000db0 <main+0x220>)
+ 8000cf2:	edc3 7a01 	vstr	s15, [r3, #4]
 		targetSpeed[MotorY] = PID_Calculate(&PID_MotorPosition[MotorY], Motor[MotorY].TOTAL_ANGLE, targetPosition[MotorY]);
- 8000cf2:	4b30      	ldr	r3, [pc, #192]	@ (8000db4 <main+0x224>)
- 8000cf4:	6b1b      	ldr	r3, [r3, #48]	@ 0x30
- 8000cf6:	ee07 3a90 	vmov	s15, r3
- 8000cfa:	eef8 7ae7 	vcvt.f32.s32	s15, s15
- 8000cfe:	4b2c      	ldr	r3, [pc, #176]	@ (8000db0 <main+0x220>)
- 8000d00:	ed93 7a01 	vldr	s14, [r3, #4]
- 8000d04:	eef0 0a47 	vmov.f32	s1, s14
- 8000d08:	eeb0 0a67 	vmov.f32	s0, s15
- 8000d0c:	4824      	ldr	r0, [pc, #144]	@ (8000da0 <main+0x210>)
- 8000d0e:	f7ff fd8a 	bl	8000826 <PID_Calculate>
- 8000d12:	eef0 7a40 	vmov.f32	s15, s0
- 8000d16:	4b23      	ldr	r3, [pc, #140]	@ (8000da4 <main+0x214>)
- 8000d18:	edc3 7a01 	vstr	s15, [r3, #4]
+ 8000cf6:	4b2f      	ldr	r3, [pc, #188]	@ (8000db4 <main+0x224>)
+ 8000cf8:	6b1b      	ldr	r3, [r3, #48]	@ 0x30
+ 8000cfa:	ee07 3a90 	vmov	s15, r3
+ 8000cfe:	eef8 7ae7 	vcvt.f32.s32	s15, s15
+ 8000d02:	4b2b      	ldr	r3, [pc, #172]	@ (8000db0 <main+0x220>)
+ 8000d04:	ed93 7a01 	vldr	s14, [r3, #4]
+ 8000d08:	eef0 0a47 	vmov.f32	s1, s14
+ 8000d0c:	eeb0 0a67 	vmov.f32	s0, s15
+ 8000d10:	4823      	ldr	r0, [pc, #140]	@ (8000da0 <main+0x210>)
+ 8000d12:	f7ff fd88 	bl	8000826 <PID_Calculate>
+ 8000d16:	eef0 7a40 	vmov.f32	s15, s0
+ 8000d1a:	4b22      	ldr	r3, [pc, #136]	@ (8000da4 <main+0x214>)
+ 8000d1c:	edc3 7a01 	vstr	s15, [r3, #4]
 		PID_Calculate(&PID_MotorSpeed[MotorY], Motor[MotorY].RPM, targetSpeed[MotorY]);
- 8000d1c:	4b25      	ldr	r3, [pc, #148]	@ (8000db4 <main+0x224>)
- 8000d1e:	f9b3 301c 	ldrsh.w	r3, [r3, #28]
- 8000d22:	ee07 3a90 	vmov	s15, r3
- 8000d26:	eef8 7ae7 	vcvt.f32.s32	s15, s15
- 8000d2a:	4b1e      	ldr	r3, [pc, #120]	@ (8000da4 <main+0x214>)
- 8000d2c:	ed93 7a01 	vldr	s14, [r3, #4]
- 8000d30:	eef0 0a47 	vmov.f32	s1, s14
- 8000d34:	eeb0 0a67 	vmov.f32	s0, s15
- 8000d38:	4814      	ldr	r0, [pc, #80]	@ (8000d8c <main+0x1fc>)
- 8000d3a:	f7ff fd74 	bl	8000826 <PID_Calculate>
+ 8000d20:	4b24      	ldr	r3, [pc, #144]	@ (8000db4 <main+0x224>)
+ 8000d22:	f9b3 301c 	ldrsh.w	r3, [r3, #28]
+ 8000d26:	ee07 3a90 	vmov	s15, r3
+ 8000d2a:	eef8 7ae7 	vcvt.f32.s32	s15, s15
+ 8000d2e:	4b1d      	ldr	r3, [pc, #116]	@ (8000da4 <main+0x214>)
+ 8000d30:	ed93 7a01 	vldr	s14, [r3, #4]
+ 8000d34:	eef0 0a47 	vmov.f32	s1, s14
+ 8000d38:	eeb0 0a67 	vmov.f32	s0, s15
+ 8000d3c:	4813      	ldr	r0, [pc, #76]	@ (8000d8c <main+0x1fc>)
+ 8000d3e:	f7ff fd72 	bl	8000826 <PID_Calculate>
 
 		Motor_SendCmd(PID_MotorSpeed[MotorX].Output, PID_MotorSpeed[MotorY].Output);
- 8000d3e:	4b12      	ldr	r3, [pc, #72]	@ (8000d88 <main+0x1f8>)
- 8000d40:	edd3 7a0f 	vldr	s15, [r3, #60]	@ 0x3c
- 8000d44:	eefd 7ae7 	vcvt.s32.f32	s15, s15
- 8000d48:	ee17 3a90 	vmov	r3, s15
- 8000d4c:	b21b      	sxth	r3, r3
- 8000d4e:	4a0e      	ldr	r2, [pc, #56]	@ (8000d88 <main+0x1f8>)
- 8000d50:	edd2 7a26 	vldr	s15, [r2, #152]	@ 0x98
- 8000d54:	eefd 7ae7 	vcvt.s32.f32	s15, s15
- 8000d58:	ee17 2a90 	vmov	r2, s15
- 8000d5c:	b212      	sxth	r2, r2
- 8000d5e:	4611      	mov	r1, r2
- 8000d60:	4618      	mov	r0, r3
- 8000d62:	f7ff fcc3 	bl	80006ec <Motor_SendCmd>
-		HAL_Delay(4);
- 8000d66:	2004      	movs	r0, #4
- 8000d68:	f000 fd3a 	bl	80017e0 <HAL_Delay>
-		targetPosition[MotorX] = (iBUS_Channel[1] - 1500) * 300;
- 8000d6c:	bf00      	nop
- 8000d6e:	e77c      	b.n	8000c6a <main+0xda>
- 8000d70:	40021c00 	.word	0x40021c00
- 8000d74:	40021000 	.word	0x40021000
- 8000d78:	40021800 	.word	0x40021800
- 8000d7c:	40666666 	.word	0x40666666
+ 8000d42:	4b11      	ldr	r3, [pc, #68]	@ (8000d88 <main+0x1f8>)
+ 8000d44:	edd3 7a0f 	vldr	s15, [r3, #60]	@ 0x3c
+ 8000d48:	eefd 7ae7 	vcvt.s32.f32	s15, s15
+ 8000d4c:	ee17 3a90 	vmov	r3, s15
+ 8000d50:	b21b      	sxth	r3, r3
+ 8000d52:	4a0d      	ldr	r2, [pc, #52]	@ (8000d88 <main+0x1f8>)
+ 8000d54:	edd2 7a26 	vldr	s15, [r2, #152]	@ 0x98
+ 8000d58:	eefd 7ae7 	vcvt.s32.f32	s15, s15
+ 8000d5c:	ee17 2a90 	vmov	r2, s15
+ 8000d60:	b212      	sxth	r2, r2
+ 8000d62:	4611      	mov	r1, r2
+ 8000d64:	4618      	mov	r0, r3
+ 8000d66:	f7ff fcc1 	bl	80006ec <Motor_SendCmd>
+		HAL_Delay(3);
+ 8000d6a:	2003      	movs	r0, #3
+ 8000d6c:	f000 fd38 	bl	80017e0 <HAL_Delay>
+		targetPosition[MotorX] = (iBUS_Channel[0] - 1500) * 100;
+ 8000d70:	bf00      	nop
+ 8000d72:	e77e      	b.n	8000c72 <main+0xe2>
+ 8000d74:	40021c00 	.word	0x40021c00
+ 8000d78:	40021000 	.word	0x40021000
+ 8000d7c:	40021800 	.word	0x40021800
  8000d80:	00000000 	.word	0x00000000
- 8000d84:	3f19999a 	.word	0x3f19999a
+ 8000d84:	40a33333 	.word	0x40a33333
  8000d88:	200000a8 	.word	0x200000a8
  8000d8c:	20000104 	.word	0x20000104
  8000d90:	3f570a3d 	.word	0x3f570a3d
