@@ -5,7 +5,7 @@
 
 #define ABS(x) ( (x>0) ? (x) : (-x) )
 
-void abs_limit(float *a, float ABS_MAX) {
+void abs_limit(double *a, double ABS_MAX) {
 	if (*a > ABS_MAX)
 		*a = ABS_MAX;
 	if (*a < -ABS_MAX)
@@ -13,7 +13,7 @@ void abs_limit(float *a, float ABS_MAX) {
 }
 
 static void pid_param_init(PID_TypeDef *pid, uint32_t maxout,
-		uint32_t intergral_limit, float kp, float ki, float kd) {
+		uint32_t intergral_limit, double kp, double ki, double kd) {
 
 	pid->IntegralLimit = intergral_limit;
 	pid->MaxOutput = maxout;
@@ -22,13 +22,13 @@ static void pid_param_init(PID_TypeDef *pid, uint32_t maxout,
 	pid->d = kd;
 }
 
-static void pid_reset(PID_TypeDef *pid, float kp, float ki, float kd) {
+static void pid_reset(PID_TypeDef *pid, double kp, double ki, double kd) {
 	pid->p = kp;
 	pid->i = ki;
 	pid->d = kd;
 }
 
-float PID_Calculate(PID_TypeDef *pid, float get, float set) {
+double PID_Calculate(PID_TypeDef *pid, double get, double set) {
 	pid->get[CURR] = get;
 	pid->set[CURR] = set;
 	pid->err[CURR] = set - get;	//set - measure
@@ -55,7 +55,7 @@ float PID_Calculate(PID_TypeDef *pid, float get, float set) {
 }
 
 void PID_StructInit(PID_TypeDef *pid, uint32_t maxout,
-		uint32_t I_Limit, float kp, float ki, float kd, float deadband) {
+		uint32_t I_Limit, double kp, double ki, double kd, double deadband) {
 
 	pid->f_param_init = pid_param_init;
 	pid->f_pid_reset = pid_reset;

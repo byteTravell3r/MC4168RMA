@@ -109,12 +109,12 @@ int main(void) {
 	HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, GPIO_PIN_SET);
 	HAL_GPIO_WritePin(GND_OF_5VO_GPIO_Port, GND_OF_5VO_Pin, GPIO_PIN_SET);
 
-	PID_StructInit(&PID_MotorSpeed[MotorX], 2000.f, 10000.f, 5.0f, 0, 5.1f, 0);
-	PID_StructInit(&PID_MotorSpeed[MotorY], 3000.f, 10000.f, 5.0f, 0, 5.0f, 0);
+	PID_StructInit(&PID_MotorSpeed[MotorX], 4000.f, 10000.f, 5.0f, 0, 5.1f, 0);
+	PID_StructInit(&PID_MotorSpeed[MotorY], 4000.f, 10000.f, 5.0f, 0, 5.0f, 0);
 	PID_StructInit(&PID_MotorPosition[MotorX], 100000.f, 10000.f, 0.08f, 0, 0.84f, 0);
 	PID_StructInit(&PID_MotorPosition[MotorY], 100000.f, 10000.f, 0.08f, 0, 0.84f, 0);
 
-	static float targetSpeed[2], targetPosition[2];
+	static double targetSpeed[2], targetPosition[2];
 	targetSpeed[0] = 192;
 	targetSpeed[1] = 192;
 
@@ -130,16 +130,16 @@ int main(void) {
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
-		targetPosition[MotorX] = (iBUS_Channel[0] - 1500) * 100;
+		targetPosition[MotorX] += (iBUS_Channel[0] - 1500) * 1.2;
 		targetSpeed[MotorX] = PID_Calculate(&PID_MotorPosition[MotorX], Motor[MotorX].TOTAL_ANGLE, targetPosition[MotorX]);
 		PID_Calculate(&PID_MotorSpeed[MotorX], Motor[MotorX].RPM, targetSpeed[MotorX]);
 
-		targetPosition[MotorY] = (iBUS_Channel[3] - 1500) * 100;
+		targetPosition[MotorY] += (iBUS_Channel[3] - 1500) * 1.2;
 		targetSpeed[MotorY] = PID_Calculate(&PID_MotorPosition[MotorY], Motor[MotorY].TOTAL_ANGLE, targetPosition[MotorY]);
 		PID_Calculate(&PID_MotorSpeed[MotorY], Motor[MotorY].RPM, targetSpeed[MotorY]);
 
 		Motor_SendCmd(PID_MotorSpeed[MotorX].Output, PID_MotorSpeed[MotorY].Output);
-		HAL_Delay(3);
+		HAL_Delay(2);
 	}
 	/* USER CODE END 3 */
 }
